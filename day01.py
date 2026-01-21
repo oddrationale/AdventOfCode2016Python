@@ -7,6 +7,8 @@ from aocd import get_data
 
 
 class Orientation(Enum):
+    """Cardinal directions (North, East, South, West)."""
+
     N = "N"
     E = "E"
     S = "S"
@@ -14,16 +16,22 @@ class Orientation(Enum):
 
 
 class Position(NamedTuple):
+    """2D coordinate position."""
+
     x: int
     y: int
 
 
 class Rotation(StrEnum):
+    """Turn direction (Left or Right)."""
+
     L = "L"
     R = "R"
 
 
 class Instruction(NamedTuple):
+    """A turn direction and distance to walk."""
+
     rotation: Rotation
     distance: int
 
@@ -54,6 +62,7 @@ def parse_input(input: str) -> list[Instruction]:
 
 
 def turn(orientation: Orientation, rotation: Rotation) -> Orientation:
+    """Return new orientation after turning left or right."""
     if rotation == Rotation.R:
         return TURN_RIGHT[orientation]
     else:
@@ -63,6 +72,7 @@ def turn(orientation: Orientation, rotation: Rotation) -> Orientation:
 def move(
     current: tuple[Position, Orientation], instruction: Instruction
 ) -> tuple[Position, Orientation]:
+    """Execute a single instruction and return new position and orientation."""
     current_position, current_orientation = current
     rotation, distance = instruction
     new_orientation = turn(current_orientation, rotation)
@@ -88,6 +98,7 @@ def generate_all_positions(
     start: tuple[Position, Orientation],
     instructions: list[Instruction],
 ) -> Iterator[Position]:
+    """Generate all positions visited while following instructions."""
     current_position, current_orientation = start
     yield current_position
 
@@ -118,6 +129,7 @@ def part2(instructions: list[Instruction]) -> int:
 
 
 def main() -> None:
+    """Solve and print both parts of the puzzle."""
     data = get_data(year=2016, day=1)
     instructions = parse_input(data)
 
