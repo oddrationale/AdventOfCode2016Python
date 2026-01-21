@@ -22,6 +22,10 @@ class Position(NamedTuple):
     y: int
 
 
+type State = tuple[Position, Orientation]
+"""A tuple representing the current position and orientation."""
+
+
 class Rotation(StrEnum):
     """Turn direction (Left or Right)."""
 
@@ -69,9 +73,7 @@ def turn(orientation: Orientation, rotation: Rotation) -> Orientation:
         return TURN_LEFT[orientation]
 
 
-def move(
-    current: tuple[Position, Orientation], instruction: Instruction
-) -> tuple[Position, Orientation]:
+def move(current: State, instruction: Instruction) -> State:
     """Execute a single instruction and return new position and orientation."""
     current_position, current_orientation = current
     rotation, distance = instruction
@@ -95,7 +97,7 @@ def part1(instructions: list[Instruction]) -> int:
 
 
 def generate_all_positions(
-    start: tuple[Position, Orientation],
+    start: State,
     instructions: list[Instruction],
 ) -> Iterator[Position]:
     """Generate all positions visited while following instructions."""
