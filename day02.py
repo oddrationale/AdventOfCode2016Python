@@ -98,7 +98,7 @@ def solve(instructions: Instructions, config: KeypadConfig) -> str:
     def run_instruction(state: Position, instruction: Instruction) -> Position:
         return next_button(state, instruction, config.keypad)
 
-    buttons = list(
+    buttons: list[Position] = list(
         accumulate(
             instructions,
             run_instruction,
@@ -120,8 +120,8 @@ def part2(instructions: Instructions) -> str:
 
 def main() -> None:
     """Solve and print both parts of the puzzle."""
-    data = get_data(year=2016, day=2)
-    instructions = parse_input(data)
+    data: str = get_data(year=2016, day=2)
+    instructions: Instructions = parse_input(data)
 
     print(f"Part 1: {part1(instructions)}")
     print(f"Part 2: {part2(instructions)}")
