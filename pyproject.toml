@@ -1,0 +1,9 @@
+[project]
+name = "adventofcode2016python"
+version = "0.1.0"
+description = "Solution to Advent of Code 2016 in Python"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aocd>=0.1",
+]
